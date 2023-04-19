@@ -8,7 +8,7 @@ import {
 } from "react-icons/bs";
 import { AiOutlineProject } from "react-icons/ai";
 
-const Sidebar = ({ darkMode, toggleMode }) => {
+const Sidebar = ({ darkmode, toggleMode }) => {
   return (
     <div className='w-full h-full pr-5 border-r bg-white dark:bg-black/30 p-[30px]  min-h-screen relative '>
       <Link href='/'>
@@ -40,7 +40,7 @@ const Sidebar = ({ darkMode, toggleMode }) => {
           <div className='flex items-end justify-evenly text-gray-500 dark:bg-black/70 py-4 mx-auto'>
             <BsFillSunFill size={20} />
             <div onClick={toggleMode} className='cursor-pointer'>
-              {darkMode ? (
+              {darkmode ? (
                 <BsToggleOff className='text-indigo-500' size={20} />
               ) : (
                 <BsToggleOn className='text-indigo-500' size={20} />

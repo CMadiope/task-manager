@@ -1,8 +1,8 @@
 import React from "react";
 
-const HomePage = ({ darkMode }) => {
+const HomePage = ({ darkmode }) => {
   return (
-    <div className={darkMode ? "dark " : ""}>
+    <div className={darkmode ? "dark " : ""}>
       <div className="text-black dark:text-white">home</div>
     </div>
   );

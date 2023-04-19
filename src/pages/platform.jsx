@@ -1,17 +1,10 @@
+import Topbar from "@/components/Topbar";
 import React from "react";
 
 const platform = () => {
   return (
     <div className='dark:text-white '>
-      <div className='p-[30px]  flex justify-between items-center dark:bg-black/30'>
-        <h1 className='text-md md:text-xl '>Platform Launch</h1>
-        <div className='group'>
-          <button className='text-xs md:text-sm  px-4 py-2 bg-indigo-600 rounded-full group-hover:bg-indigo-500 flex items-center'>
-            <span className="max-sm:text-base">+</span>
-            <p className="hidden sm:block">Add New Task</p>
-          </button>
-        </div>
-      </div>
+      <Topbar/>
       <div className='pl-[30px] py-5 grid sm:grid-cols-2 md:grid-cols-3 gap-10'>
         <div>
           <div className='flex items-center gap-2'>

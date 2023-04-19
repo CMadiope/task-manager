@@ -2,7 +2,7 @@ import HomePage from "@/components/HomePage";
 import Head from "next/head";
 import { useState } from "react";
 
-export default function Home({ darkMode }) {
+export default function Home({ darkmode }) {
   return (
     <div className={darkMode ? "dark w-full" : "w-full"}>
       <Head>
@@ -12,7 +12,7 @@ export default function Home({ darkMode }) {
         <link rel='icon' href='/icon.png' />
       </Head>
       <main className=' dark:bg-black/90'>
-        <HomePage darkMode={darkMode}/>
+        <HomePage darkmode={darkmode}/>
       </main>
     </div>
   );
