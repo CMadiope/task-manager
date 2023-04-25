@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { addTask } from "@/store/taskSlice";
 import { v4 as uuidv4 } from "uuid";
 
-const NewTask = () => {
+const NewTask = ({ handleModal }) => {
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -11,10 +11,11 @@ const NewTask = () => {
   const [subtask, setSubtask] = useState("");
   const statusRef = useRef();
 
-  // const addNewTask = () => {
-  //   const id = uuidv4();
-  //   dispatch(addTask({ id, title, description, status, subtask }));
-  // };
+  const addNewTask = () => {
+    const id = uuidv4();
+    dispatch(addTask({ id: uuidv4(), title, description, status, subtask }));
+    handleModal();
+  };
 
   const selectStatus = (e) => {
     const selectedValue = statusRef.current.value;
@@ -23,9 +24,9 @@ const NewTask = () => {
   // console.log(taskItems);
 
   return (
-    <div className='text-white bg-zinc-500  p-8 rounded-md '>
-      <h4>Add New Task</h4>
-      <div className='py-4'>
+    <div className='text-white bg-zinc-500  p-4 rounded-md '>
+      <h4 className='text-md'>Add New Task</h4>
+      <div className='py-2'>
         <p className='text-sm pb-2'>Title</p>
         <input
           value={title}
@@ -35,7 +36,7 @@ const NewTask = () => {
           className='bg-transparent w-full border rounded-md p-2 outline-none placeholder:text-sm'
         />
       </div>
-      <div className='py-4'>
+      <div className='py-2'>
         <p className='text-sm pb-2'>Description</p>
         <textarea
           type='text'
@@ -45,7 +46,7 @@ const NewTask = () => {
           className='bg-transparent w-full border rounded-md p-4 outline-none placeholder:text-sm '
         />
       </div>
-      <div className='py-4'>
+      <div className='py-2'>
         <p className='text-sm pb-2'>Subtasks</p>
         <input
           value={subtask}
@@ -55,10 +56,10 @@ const NewTask = () => {
           className='bg-transparent w-full border rounded-md p-2 outline-none placeholder:text-sm'
         />
       </div>
-      <div className='py-4'>
+      <div className='py-2'>
         <p className='text-sm pb-2'>Status</p>
         <select
-          className='w-full bg-transparent text-sm outline-none py-4'
+          className='w-full bg-transparent text-sm outline-none py-2'
           ref={statusRef}
           onChange={selectStatus}
         >
@@ -69,7 +70,7 @@ const NewTask = () => {
       </div>
       <button
         className='text-center text-white bg-indigo-500 w-full py-2 rounded-3xl hover:bg-indigo-400'
-        onClick={()=> dispatch(addTask({id:uuid(), title, description, status, subtask}))}
+        onClick={addNewTask}
       >
         Create Task
       </button>

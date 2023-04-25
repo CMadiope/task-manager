@@ -1,7 +1,8 @@
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { removeTask } from "@/store/taskSlice";
+import { v4 as uuidv4 } from "uuid";
+import { removeBoard } from "@/store/boardSlice";
 import {
   BsToggleOn,
   BsToggleOff,
@@ -10,15 +11,21 @@ import {
   BsTrash,
 } from "react-icons/bs";
 import { AiOutlineProject } from "react-icons/ai";
+import NewBoard from "./NewBoard";
 
 const Sidebar = ({ darkmode, toggleMode }) => {
-  const tasks = useSelector((state) => state.task.taskList);
+  const board = useSelector((state) => state.board.boardList);
   const dispatch = useDispatch();
 
-  // console.log(tasks);
+  const [showModal, setShowModal] = useState(false);
+
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  };
+  // console.log(board);
 
   return (
-    <div className='w-full h-full pr-5 border-r bg-white dark:bg-black/30 p-[30px]   relative z-30 '>
+    <div className='w-full h-full pr-5 border-r bg-white dark:bg-black/30 p-[30px]  relative  z-30'>
       <Link href='/'>
         <h1 className='font-semibold text-2xl dark:text-white text-black'>
           kanban
@@ -30,24 +37,39 @@ const Sidebar = ({ darkmode, toggleMode }) => {
             all boards (0)
           </span>
           <div>
-            {tasks?.map((task) => (
+            {board?.map((board) => (
+              
+
               <Link
-                key={task.id}
-                href='/platform'
+                key={board.id}
+                href={`/board/[title]`}
+                as={`/board/${board.title}`}
                 className='py-2 pr-10 pl-2 flex items-center justify-between bg-indigo-600/70 rounded-r-full text-black dark:text-white my-4 w-full'
               >
                 <div className='flex gap-2 items-center'>
                   <AiOutlineProject />
-                  <p className='capitalize text-xs sm:text-sm'>{task.title}</p>
+                  <p className='capitalize text-xs sm:text-sm'>{board.title}</p>
                 </div>
                 <button
-                  onClick={() => dispatch(removeTask(task.id))}
+                  onClick={() => dispatch(removeBoard(board.id))}
                   className='cursor-pointer text-red-700 hover:scale-120 '
                 >
-                  <BsTrash/>
+                  <BsTrash />
                 </button>
               </Link>
             ))}
+            <div
+              className='py-2 pr-10 pl-2 flex items-center justify-between bg-transparent rounded-r-full   my-4 w-full text-indigo-500 cursor-pointer hover:opacity-80'
+              onClick={toggleModal}
+            >
+              <div className='flex gap-2 items-center '>
+                <AiOutlineProject />
+                <p className='capitalize text-xs sm:text-sm'>
+                  + Create New Board
+                </p>
+              </div>
+            </div>
+            {showModal && <NewBoard toggleModal={toggleModal} />}
           </div>
         </div>
         <div className='w-full absolute bottom-0 left-0'>

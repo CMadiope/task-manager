@@ -8,8 +8,8 @@ const Layout = ({ children }) => {
   };
 
   return (
-    <div className={darkmode ? "dark" : ''}>
-      <div className='relative flex min-h-screen'>
+    <div className={darkmode ? "dark" : ""}>
+      <div className=' flex min-h-screen '>
         <div className='dark:bg-black/90 w-[400px]'>
           <Sidebar darkmode={darkmode} toggleMode={toggleMode} />
         </div>
